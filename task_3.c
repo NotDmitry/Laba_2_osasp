@@ -32,11 +32,8 @@ int main(int argc, char *argv[])
 
     printf("Enter Ctrl+D to stop:\n");
     //read till the end of file
-    while (get_input != EOF)
-    {
-        get_input = getc(stdin);
+    while ((get_input = getc(stdin)) != EOF)
         fputc(get_input, f_write);
-    }
 
     //try close the file
     if (fclose(f_write))
@@ -46,3 +43,4 @@ int main(int argc, char *argv[])
     }
     return 0;
 }
+
