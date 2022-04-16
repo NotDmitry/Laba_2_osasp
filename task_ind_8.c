@@ -6,7 +6,7 @@ static unsigned int total_size = 0;
 static unsigned int total_on_disk = 0;
 static int sum(const char *fpath, const struct stat *sb, int typeflag){
     total_size += sb->st_size;
-    total_on_disk += sb->st_blksize * sb->st_blocks;
+    total_on_disk += 512 * sb->st_blocks;
     return 0;
 }
 
@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
         return 2;
     }
     printf("Size in bytes : %d\n"
-           "Size in blocks: %d\n"
+           "Size in bytes by blocks: %d\n"
            "Disk space efficiency: %.2f%%\n", total_size, total_on_disk, ((float)total_size/(float)total_on_disk * 100));
     return 0;
 }
