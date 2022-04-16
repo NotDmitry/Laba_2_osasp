@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
 
     char* dir_name = argv[1]; //searching directory path
 
-    if (ftw(dir_name, sum, 200)) {
+    if (ftw(dir_name, sum, 20)) {
         perror("ftw");
         return 2;
     }
