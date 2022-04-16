@@ -1,4 +1,5 @@
 #include <stdio.h>
+#define CTRL_F 6
 
 /*
  * Task: Write console input to the file
@@ -30,11 +31,15 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    printf("Enter Ctrl+D to stop:\n");
+    printf("Enter Ctrl+F then ENTER to stop:\n");
     //read till the end of file
-    while ((get_input = getc(stdin)) != EOF)
+    while (1) {
+        get_input = getc(stdin);
+        if (get_input == CTRL_F)
+            break;
         fputc(get_input, f_write);
-
+    }
+    printf("\n");
     //try close the file
     if (fclose(f_write))
     {
