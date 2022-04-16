@@ -27,6 +27,16 @@ int main(int argc, char *argv[])
 
     char get_input = '0'; //where to read
 
+    //Copy privileges from source to destination file using stat struct
+    struct stat buff;
+    if (stat(src_path, &buff))
+    {
+        fprintf(stderr, "Unable to copy the mode");
+        return 1;
+    }
+    else
+        chmod(dest_path, buff.st_mode);
+
     //try open source file
     if ((src_file = fopen(src_path, "r")) == NULL)
     {
@@ -40,15 +50,6 @@ int main(int argc, char *argv[])
         fprintf(stderr,"Unable to open the file");
         return 1;
     }
-
-    //Copy privileges from source to destination file using stat struct
-    struct stat buff;
-    if (stat(src_path, &buff))
-    {
-        fprintf(stderr, "Unable to copy the mode");
-    }
-    else
-        chmod(dest_path, buff.st_mode);
 
     //copy content of file
     while ( (get_input = fgetc(src_file)) != EOF)
@@ -69,4 +70,5 @@ int main(int argc, char *argv[])
     }
     return 0;
 }
+
 
