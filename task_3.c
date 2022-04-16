@@ -37,7 +37,10 @@ int main(int argc, char *argv[])
         get_input = getc(stdin);
         if (get_input == CTRL_F)
             break;
-        fputc(get_input, f_write);
+        if (fputc(get_input, f_write) == EOF) {
+            fprintf(stderr, "Can't write into file");
+            return 1;
+        }
     }
     printf("\n");
     //try close the file
