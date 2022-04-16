@@ -54,7 +54,11 @@ int main(int argc, char *argv[])
     //copy content of file
     while ( (get_input = fgetc(src_file)) != EOF)
     {
-        fputc(get_input, dest_file);
+        if (fputc(get_input, dest_file) == EOF)
+        {
+            fprintf(stderr, "Can't write into file");
+            return 1;
+        }
     }
 
     //try close two files
@@ -70,5 +74,7 @@ int main(int argc, char *argv[])
     }
     return 0;
 }
+
+
 
 
