@@ -57,6 +57,8 @@ int main(int argc, char *argv[])
                 while (get_input != '\n' && get_input != EOF)
                 {
                     get_input = fgetc(txt_file);
+                    if (get_input == EOF)
+                        break;
                     printf("%c", get_input);
                 }
             }
